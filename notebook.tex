@@ -1,0 +1,742 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass[11pt]{article}
+
+    
+    
+    \usepackage[T1]{fontenc}
+    % Nicer default font (+ math font) than Computer Modern for most use cases
+    \usepackage{mathpazo}
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % We will generate all images so they have a width \maxwidth. This means
+    % that they will get their normal width if they fit onto the page, but
+    % are scaled down if they would overflow the margins.
+    \makeatletter
+    \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+    \else\Gin@nat@width\fi}
+    \makeatother
+    \let\Oldincludegraphics\includegraphics
+    % Set max figure width to be 80% of text width, for now hardcoded.
+    \renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionLabelFormat{nolabel}{}
+    \captionsetup{labelformat=nolabel}
+
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    
+
+    
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatability definitions
+    \def\gt{>}
+    \def\lt{<}
+    % Document parameters
+    \title{Assignment 5}
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@fm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sa\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@dl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+    
+
+    
+    Lorenzon\\
+CS 1.3\\
+CS 2.4\\
+CS 4.3\\
+BC 2.5\\
+DAAG 7.5
+
+    \hypertarget{cs-1.3}{%
+\section{CS 1.3}\label{cs-1.3}}
+
+    Suppose that \[ Y \sim 
+\left(
+\begin{bmatrix}
+    1  \\
+   2 
+\end{bmatrix},
+\begin{bmatrix}
+2 & 1 \\
+1 & 2  
+\end{bmatrix}
+\right) \]
+
+Find the conditional p.d.f. of \(Y_1\) given that \(Y_1 + Y_2 = 3\)
+
+    \textbf{Solution:}
+
+The conditional (on \(Y_2 = 3 - Y_1\) ) distribution is a multivariate
+normal \((Y_1 | Y_2 = 3 - Y_1) \sim N(\bar\mu , \bar\Sigma)\) where:
+
+\(\bar\mu = \mu_1 + \Sigma_{12} \Sigma_{22}^{-1}(3 -Y_1 - \mu_2)\)
+
+and covariance matrix:
+
+\$ \bar\Sigma = \Sigma\emph{\{11\} -
+\Sigma}\{12\}\Sigma\emph{\{22\}\^{}\{-1\}\Sigma}\{21\}\$
+
+As a general case,
+\[X_1 | X_2 = x_2 \sim Normal \left(\mu_1 + \frac{\sigma_1}{\sigma_2} \rho (x_2-\mu_2), (1-\rho^2)\sigma_1^2\right)\]
+
+with \(\rho = -1\)
+
+so
+
+\[X_1 | X_2 = x_2 \sim Normal \left(\mu_1 - \frac{\sigma_1}{\sigma_2}  (x_2-\mu_2), (1-1)\sigma_1^2\right)\]
+
+\[X_1 | X_2 = x_2 \sim Normal \left(\mu_1 - \frac{\sigma_1}{\sigma_2}  (x_2-\mu_2), 0\right)\]
+
+From \(\Sigma\), \(\sigma_1 = \sigma_2\), so it reduces to:
+
+\[X_1 | X_2 = x_2 \sim Normal \left(\mu_1 - (x_2-\mu_2), 0\right)\]
+
+\[X_1 | X_2 = x_2 \sim Normal \left(\mu_1+\mu_2 - x_2, 0\right)\]
+
+and from the problem
+
+\[X_1 | X_2 = x_2 \sim Normal \left(3-x_2, 0\right)\]
+
+It makes sense, since, if you know one of the variables, and the sum is
+fixed, you know the other.
+
+    \hypertarget{cs-2.4}{%
+\section{CS 2.4}\label{cs-2.4}}
+
+Using R, write a function to evaluate the log-likelihood of \(\theta_t\)
+for example 4 in section 2.1. (Hint: see \texttt{?dexp}). Plot log
+likelihood against \(\theta_t\) over a suitable range and making use of
+(2.4) and the definition of a confidence interval, find a 95\%
+confidence interval for \(\theta_t\) (\texttt{pchisq} is also useful).
+
+    MLE for exponential distributions is \(\hat\lambda=\frac{1}{\bar x}\)
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}1}]:} \PY{c+c1}{\PYZsh{}range of theta}
+        theta \PY{o}{\PYZlt{}\PYZhy{}} seq \PY{p}{(}\PY{l+m}{0.00000001}\PY{p}{,} \PY{l+m}{0.01}\PY{p}{,} \PY{l+m}{0.00001}\PY{p}{)}
+        
+        \PY{c+c1}{\PYZsh{}data from book}
+        xx \PY{o}{=} \PY{k+kt}{c} \PY{p}{(}\PY{l+m}{28}\PY{p}{,} \PY{l+m}{32}\PY{p}{,} \PY{l+m}{49}\PY{p}{,} \PY{l+m}{84}\PY{p}{,} \PY{l+m}{357}\PY{p}{,}\PY{l+m}{933}\PY{p}{,}\PY{l+m}{1078}\PY{p}{,}\PY{l+m}{1183}\PY{p}{,}\PY{l+m}{1560}\PY{p}{,}\PY{l+m}{2114}\PY{p}{,}\PY{l+m}{2144}\PY{p}{)}
+        
+        \PY{k+kp}{cat}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{mean: \PYZdq{}} \PY{p}{,} \PY{k+kp}{mean}\PY{p}{(}xx\PY{p}{)}\PY{p}{,} \PY{l+s}{\PYZdq{}}\PY{l+s}{\PYZbs{}n\PYZdq{}}\PY{p}{)} 
+        \PY{k+kp}{cat}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{MLE : \PYZdq{}} \PY{p}{,} \PY{l+m}{1}\PY{o}{/}\PY{k+kp}{mean}\PY{p}{(}xx\PY{p}{)}\PY{p}{)} \PY{c+c1}{\PYZsh{}MLE}
+        
+        n\PY{o}{=} \PY{k+kp}{length}\PY{p}{(}xx\PY{p}{)}
+        
+        \PY{c+c1}{\PYZsh{}log likelihod}
+        LLexp \PY{o}{\PYZlt{}\PYZhy{}} \PY{k+kr}{function} \PY{p}{(}theta\PY{p}{)} \PY{p}{\PYZob{}}
+             \PY{k+kp}{log}\PY{p}{(}theta\PY{p}{)} \PY{o}{*} n \PY{o}{\PYZhy{}}theta\PY{o}{*}\PY{k+kp}{sum}\PY{p}{(}xx\PY{p}{)}
+        \PY{p}{\PYZcb{}}
+        
+        \PY{c+c1}{\PYZsh{}likelihood, to compare peaks}
+        Lexp \PY{o}{\PYZlt{}\PYZhy{}} \PY{k+kr}{function} \PY{p}{(}theta\PY{p}{)} \PY{p}{\PYZob{}}
+            theta\PY{o}{\PYZca{}}n \PY{o}{*} \PY{k+kp}{exp}\PY{p}{(}\PY{o}{\PYZhy{}}theta\PY{o}{*}\PY{k+kp}{sum}\PY{p}{(}xx\PY{p}{)}\PY{p}{)}
+        \PY{p}{\PYZcb{}}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+mean:  869.2727 
+MLE :  0.001150387
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}17}]:} \PY{k+kp}{options}\PY{p}{(}warn\PY{o}{=}\PY{l+m}{\PYZhy{}1}\PY{p}{)} \PY{c+c1}{\PYZsh{}to temporarily suppress warnings about Nelder\PYZhy{}Mead optimization}
+         
+         \PY{c+c1}{\PYZsh{}plot loglikelihood with CI}
+         negLLexp \PY{o}{\PYZlt{}\PYZhy{}} \PY{k+kr}{function} \PY{p}{(}\PY{k+kp}{t}\PY{p}{)} \PY{p}{\PYZob{}} \PY{o}{\PYZhy{}} LLexp\PY{p}{(}\PY{k+kp}{t}\PY{p}{)}\PY{p}{\PYZcb{}} \PY{c+c1}{\PYZsh{}negative log lik target function}
+         opt \PY{o}{\PYZlt{}\PYZhy{}} optim\PY{p}{(}\PY{l+m}{1}\PY{p}{,}negLLexp\PY{p}{)}
+         \PY{c+c1}{\PYZsh{}despite the warnings, the results are reliable}
+         
+         plot\PY{p}{(}theta\PY{p}{,}\PY{k+kp}{sapply}\PY{p}{(}theta\PY{p}{,} LLexp\PY{p}{)}\PY{p}{,} type\PY{o}{=}\PY{l+s}{\PYZdq{}}\PY{l+s}{l\PYZdq{}}\PY{p}{,} xlim\PY{o}{=}\PY{k+kt}{c}\PY{p}{(}\PY{l+m}{0}\PY{p}{,}\PY{l+m}{0.003}\PY{p}{)}\PY{p}{,} ylim\PY{o}{=}\PY{k+kt}{c}\PY{p}{(}\PY{l+m}{\PYZhy{}100}\PY{p}{,}\PY{l+m}{\PYZhy{}80}\PY{p}{)}\PY{p}{,} ylab \PY{o}{=} \PY{l+s}{\PYZdq{}}\PY{l+s}{log\PYZhy{}likelihood\PYZdq{}}\PY{p}{)}
+         abline\PY{p}{(}v\PY{o}{=}\PY{l+m}{1}\PY{o}{/}\PY{k+kp}{mean}\PY{p}{(}xx\PY{p}{)}\PY{p}{,} lty\PY{o}{=}\PY{l+m}{2}\PY{p}{,} col\PY{o}{=}\PY{l+s}{\PYZdq{}}\PY{l+s}{green\PYZdq{}}\PY{p}{)}  \PY{c+c1}{\PYZsh{}MLE}
+         abline\PY{p}{(}v\PY{o}{=}opt\PY{o}{\PYZdl{}}par\PY{p}{,} lty\PY{o}{=}\PY{l+m}{3}\PY{p}{,} col\PY{o}{=}\PY{l+s}{\PYZdq{}}\PY{l+s}{blue\PYZdq{}}\PY{p}{)} \PY{c+c1}{\PYZsh{}perfect superposition with MLE}
+         abline\PY{p}{(}h\PY{o}{=}\PY{o}{\PYZhy{}}opt\PY{o}{\PYZdl{}}value\PY{p}{,} lty\PY{o}{=}\PY{l+m}{2}\PY{p}{)} \PY{c+c1}{\PYZsh{}max L}
+         abline\PY{p}{(}h\PY{o}{=}\PY{o}{\PYZhy{}}opt\PY{o}{\PYZdl{}}value\PY{o}{\PYZhy{}}qchisq\PY{p}{(}\PY{l+m}{.95}\PY{p}{,}\PY{l+m}{1}\PY{p}{)}\PY{o}{/}\PY{l+m}{2}\PY{p}{,} lty\PY{o}{=}\PY{l+m}{1}\PY{p}{,} col\PY{o}{=}\PY{l+s}{\PYZdq{}}\PY{l+s}{red\PYZdq{}}\PY{p}{)}  \PY{c+c1}{\PYZsh{}95\PYZpc{} CI for ML}
+         
+         reasonable\PYZus{}theta\PYZus{}values \PY{o}{\PYZlt{}\PYZhy{}} theta\PY{p}{[}LLexp\PY{p}{(}theta\PY{p}{)}\PY{o}{\PYZgt{}=}\PY{p}{(}\PY{o}{\PYZhy{}}opt\PY{o}{\PYZdl{}}value\PY{o}{\PYZhy{}}qchisq\PY{p}{(}\PY{l+m}{.95}\PY{p}{,}\PY{l+m}{1}\PY{p}{)}\PY{o}{/}\PY{l+m}{2}\PY{p}{)}\PY{p}{]}
+         
+         \PY{c+c1}{\PYZsh{}in blue, 95\PYZpc{} CI for ML thetas}
+         abline\PY{p}{(}v\PY{o}{=}\PY{k+kp}{min}\PY{p}{(}reasonable\PYZus{}theta\PYZus{}values\PY{p}{)}\PY{p}{,} col\PY{o}{=}\PY{l+s}{\PYZdq{}}\PY{l+s}{blue\PYZdq{}}\PY{p}{)}
+         abline\PY{p}{(}v\PY{o}{=}\PY{k+kp}{max}\PY{p}{(}reasonable\PYZus{}theta\PYZus{}values\PY{p}{)}\PY{p}{,} col\PY{o}{=}\PY{l+s}{\PYZdq{}}\PY{l+s}{blue\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_7_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}13}]:} cat \PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{95\PYZpc{} CI for theta: \PYZdq{}}\PY{p}{)}
+         \PY{k+kp}{cat}\PY{p}{(}\PY{k+kp}{min}\PY{p}{(}reasonable\PYZus{}theta\PYZus{}values\PY{p}{)}\PY{p}{)}
+         \PY{k+kp}{cat}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{ \PYZhy{} \PYZdq{}}\PY{p}{)}
+         \PY{k+kp}{cat}\PY{p}{(}\PY{k+kp}{max}\PY{p}{(}reasonable\PYZus{}theta\PYZus{}values\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+95\% CI for theta: 0.00060001 - 0.00197001
+    \end{Verbatim}
+
+    \hypertarget{cs-4.3}{%
+\section{CS 4.3}\label{cs-4.3}}
+
+Random variables \(X\) and \(Y\) have a joint p.d.f.
+\(f(x,y)= k x^\alpha y^\beta , 0 \le x\le 1, 0 \le y\le 1\).
+
+Assume that you have \(n\) independent pairs of observations
+\((x_i, y_i)\):
+
+\begin{enumerate}
+\def\labelenumi{\alph{enumi})}
+\tightlist
+\item
+  evaluate \(k\) in terms of \(\alpha\) and \(\beta\).
+\end{enumerate}
+
+    \[ k \int_0^1 \int_o^1 x^\alpha y^\beta dx dy =  \frac{k}{(\alpha+1)(\beta+1)}=1\]
+
+so
+
+\[ k = (\alpha+1)(\beta+1)\]
+
+    \begin{enumerate}
+\def\labelenumi{\alph{enumi})}
+\setcounter{enumi}{1}
+\tightlist
+\item
+  find the ML estimators of \(\alpha\) and \(\beta\)
+\end{enumerate}
+
+    \[MLE(\theta) = n (log(\alpha+1) + log(\beta+1)) + \sum{\alpha log(x_i)} + \sum{\beta log(y_i)}\]
+
+\[ \frac{\partial l}{\partial \alpha} = \frac{n}{\alpha+1} + \sum{log(x_i)}\]
+and similarly
+\[ \frac{\partial l}{\partial \beta} = \frac{n}{\beta+1} + \sum{log(y_i)}\]
+
+that gives:
+
+\[\hat\alpha = \frac{-n}{\sum log(x_i)}-1 \hat\beta = \frac{-n}{\sum log(y_i)}-1 \]
+
+    \begin{enumerate}
+\def\labelenumi{\alph{enumi})}
+\setcounter{enumi}{2}
+\tightlist
+\item
+  find the appropriate variances of \(\hat\alpha\) and \(\hat\beta\)
+\end{enumerate}
+
+    \[\frac{\partial^2l}{\partial\beta^2}=\frac{-n}{(\beta+1)^2}\]
+\[\frac{\partial^2l}{\partial\alpha^2}=\frac{-n}{(\alpha+1)^2}\]
+\[\frac{\partial^2l}{\partial\alpha\partial\beta}=0\]
+
+hence:
+
+\[var(\hat\alpha)\approx\frac{(\hat\alpha+1)^2}{n}\]
+
+\[var(\hat\beta)\approx\frac{(\hat\beta+1)^2}{n}\]
+
+    \hypertarget{bc-2.5}{%
+\section{BC 2.5}\label{bc-2.5}}
+
+\textbf{Estimate a normal mean with discrete prior.}
+
+Suppose you are interested in estimating the total average snowfall per
+year \(\mu\) (in inches) for a large city on the East Coast of the
+United States. Assume individual yearly snow totals \(y_1, ... , y_n\)
+are collected from a population that is assumed to be normally
+distributed with mean \(\mu\) and known standard deviation \(\sigma\) =
+10 inches.
+
+\begin{enumerate}
+\def\labelenumi{\alph{enumi})}
+\item
+  before collecting data, suppose you believe that the mean snowfall
+  \(\mu\) can be the values 20,30,40,50,60,70 inches with the following
+  probabilities:
+
+  mu \textbar{} 20 30 40 50 60 70 prior \textbar{} .1 .15 .25 .25 .15 .1
+\end{enumerate}
+
+Place the \(\mu\) probabilities in the vector \texttt{mu} and the
+associated prior probabilities in the vector \texttt{prior}.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}238}]:} mu \PY{o}{\PYZlt{}\PYZhy{}} \PY{k+kt}{c}\PY{p}{(}\PY{l+m}{20}\PY{p}{,}\PY{l+m}{30}\PY{p}{,}\PY{l+m}{40}\PY{p}{,}\PY{l+m}{50}\PY{p}{,}\PY{l+m}{60}\PY{p}{,}\PY{l+m}{70}\PY{p}{)}
+          prior \PY{o}{\PYZlt{}\PYZhy{}} \PY{k+kt}{c}\PY{p}{(}\PY{l+m}{.1}\PY{p}{,}\PY{l+m}{.15}\PY{p}{,}\PY{l+m}{.25}\PY{p}{,}\PY{l+m}{.25}\PY{p}{,}\PY{l+m}{.15}\PY{p}{,}\PY{l+m}{.1}\PY{p}{)}
+          sigma \PY{o}{\PYZlt{}\PYZhy{}} \PY{l+m}{10}
+          plot\PY{p}{(}mu\PY{p}{,}prior\PY{p}{,} type\PY{o}{=}\PY{l+s}{\PYZdq{}}\PY{l+s}{l\PYZdq{}}\PY{p}{,} ylim\PY{o}{=}\PY{k+kt}{c}\PY{p}{(}\PY{l+m}{0}\PY{p}{,}\PY{l+m}{0.3}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_16_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{enumerate}
+\def\labelenumi{\alph{enumi})}
+\setcounter{enumi}{1}
+\tightlist
+\item
+  Suppose you observe the yearly snowfall totals 38.6, 42.4, 57.5, 40.5,
+  51.7, 67.1, 33.4, 60.9, 64.1, 40.1, 40.7. Enter these data in the
+  vector \texttt{y} and compute the sample mean \texttt{ybar}.
+\end{enumerate}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}239}]:} y \PY{o}{\PYZlt{}\PYZhy{}} \PY{k+kt}{c}\PY{p}{(}\PY{l+m}{38.6}\PY{p}{,} \PY{l+m}{42.4}\PY{p}{,} \PY{l+m}{57.5}\PY{p}{,} \PY{l+m}{40.5}\PY{p}{,} \PY{l+m}{51.7}\PY{p}{,} \PY{l+m}{67.1}\PY{p}{,} \PY{l+m}{33.4}\PY{p}{,} \PY{l+m}{60.9}\PY{p}{,} \PY{l+m}{64.1}\PY{p}{,} \PY{l+m}{40.1}\PY{p}{,} \PY{l+m}{40.7}\PY{p}{)}
+          ybar \PY{o}{\PYZlt{}\PYZhy{}} \PY{k+kp}{mean}\PY{p}{(}y\PY{p}{)}
+          n \PY{o}{\PYZlt{}\PYZhy{}} \PY{k+kp}{length}\PY{p}{(}y\PY{p}{)}
+          \PY{k+kp}{cat}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{y\PYZus{}bar = \PYZdq{}}\PY{p}{,} ybar\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+y\_bar =  48.81818
+    \end{Verbatim}
+
+    \begin{enumerate}
+\def\labelenumi{\alph{enumi})}
+\setcounter{enumi}{2}
+\tightlist
+\item
+  In this problem, the likelihood function is given by
+  \[ L(\mu) = exp (-\frac{n}{2\sigma}(\mu-\bar y)^2)\] where \(\bar y\)
+  is the sample mean. Compute the likelihood of the list of values in
+  \texttt{mu} and place the likelihood values in the vector
+  \texttt{like}.
+\end{enumerate}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}254}]:} norm\PYZus{}likelihood \PY{o}{\PYZlt{}\PYZhy{}} \PY{k+kr}{function} \PY{p}{(}m\PY{p}{)} \PY{p}{\PYZob{}}
+              exp \PY{p}{(}\PY{o}{\PYZhy{}} n\PY{o}{/}\PY{p}{(}\PY{l+m}{2}\PY{o}{*}sigma\PY{p}{)} \PY{o}{*} \PY{p}{(}m \PY{o}{\PYZhy{}} ybar\PY{p}{)}\PY{o}{\PYZca{}}\PY{l+m}{2}\PY{p}{)}
+          \PY{p}{\PYZcb{}}
+          
+          like \PY{o}{\PYZlt{}\PYZhy{}} \PY{k+kp}{Vectorize}\PY{p}{(}norm\PYZus{}likelihood\PY{p}{)}\PY{p}{(}mu\PY{p}{)}
+          like
+          
+          plot\PY{p}{(}mu\PY{p}{,}\PY{k+kp}{log}\PY{p}{(}like\PY{p}{)}\PY{p}{,} type\PY{o}{=}\PY{l+s}{\PYZdq{}}\PY{l+s}{l\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{enumerate*}
+\item 4.2471649409776e-199
+\item 2.58972343022305e-85
+\item 2.66694853674476e-19
+\item 0.463855676028506
+\item 1.36256775074928e-30
+\item 6.75990086613985e-108
+\end{enumerate*}
+
+
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_20_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{enumerate}
+\def\labelenumi{\alph{enumi})}
+\setcounter{enumi}{3}
+\tightlist
+\item
+  one can compute the posterior probability for \(\mu\) using the
+  formula \texttt{post=prior*like/sum(prior*like)}. Compute the
+  posterior probabilities of \(\mu\) for this example.
+\end{enumerate}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}256}]:} post \PY{o}{=} prior \PY{o}{*} like \PY{o}{/} \PY{k+kp}{sum}\PY{p}{(}prior\PY{o}{*}like\PY{p}{)}
+          plot\PY{p}{(}mu\PY{p}{,}post\PY{p}{,} type\PY{o}{=}\PY{l+s}{\PYZdq{}}\PY{l+s}{l\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_22_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{enumerate}
+\def\labelenumi{\alph{enumi})}
+\setcounter{enumi}{4}
+\tightlist
+\item
+  Using the function \texttt{discint}, find an 80\% probability interval
+  for \(\mu\).
+\end{enumerate}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}260}]:} \PY{k+kn}{library}\PY{p}{(}LearnBayes\PY{p}{)}
+          dist \PY{o}{=} \PY{k+kp}{cbind}\PY{p}{(}mu\PY{p}{,}post\PY{p}{)}
+          pcontent \PY{o}{=} \PY{l+m}{.8}
+          discint\PY{p}{(}dist\PY{p}{,}pcontent\PY{p}{)}
+          
+          \PY{c+c1}{\PYZsh{} well, being just few discrete probability, that was expected somehow, and deluding.}
+          \PY{c+c1}{\PYZsh{} only 50 has a high probability of being the posterior.}
+          \PY{c+c1}{\PYZsh{} we could fit a distribution on our posterior, compute }
+          \PY{c+c1}{\PYZsh{} a continuous distribution, and consider .8 Prob. Interval on that, but it is not asked.}
+\end{Verbatim}
+
+
+    \begin{description}
+\item[\$prob] 1
+\item[\$set] 50
+\end{description}
+
+
+    
+    \hypertarget{daag-7.5}{%
+\section{DAAG 7.5}\label{daag-7.5}}
+
+The data frame \texttt{cuckoos} holds data on the lengths and breadths
+of eggs of cuckoos, found in the nests of six different species of host
+birds. Fit models for the regression of length on breadth that have:
+
+A: a single line for all six species. B: different parallel lines for
+the different host species. C: separate lines for the separate host
+species.
+
+Use the \texttt{anova()} function to print out the sequential analysis
+of variance table. Which of the three models is preferred? Print out the
+diagnostic plots for this model. Do they show anything worthy of note?
+Examine the output coefficients from this model carefully, and decide
+whether the results seem grouped by host species. How might the results
+be summarized for reporting purposes?
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}206}]:} \PY{c+c1}{\PYZsh{}a lot of libraries, because I experimented too.}
+          
+          \PY{k+kn}{library}\PY{p}{(}DAAG\PY{p}{)}
+          \PY{k+kn}{library}\PY{p}{(}lme4\PY{p}{)}  \PY{c+c1}{\PYZsh{}lmer}
+          \PY{k+kn}{library}\PY{p}{(}dplyr\PY{p}{)}
+          \PY{k+kn}{library}\PY{p}{(}ggplot2\PY{p}{)}
+          \PY{k+kn}{library}\PY{p}{(}MASS\PY{p}{)}
+          \PY{k+kn}{library}\PY{p}{(}broom\PY{p}{)}
+          \PY{k+kn}{library}\PY{p}{(}purrr\PY{p}{)}
+          \PY{k+kn}{library}\PY{p}{(}tibble\PY{p}{)}
+          \PY{k+kn}{library}\PY{p}{(}caret\PY{p}{)}
+          \PY{k+kn}{library}\PY{p}{(}mltools\PY{p}{)}
+          \PY{k+kn}{library}\PY{p}{(}tidyr\PY{p}{)}
+          \PY{k+kn}{library}\PY{p}{(}tidyverse\PY{p}{)}
+          \PY{c+c1}{\PYZsh{}attach(cuckoos)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}217}]:} \PY{c+c1}{\PYZsh{} A: a single line for all six species}
+          \PY{c+c1}{\PYZsh{} for this problem a simple geom\PYZus{}smooth will suffice. Bonus: confidence region}
+          
+          model1 \PY{o}{=} lm \PY{p}{(}length \PY{o}{\PYZti{}} breadth\PY{p}{,} data \PY{o}{=} cuckoos\PY{p}{)}
+          
+          ggplot\PY{p}{(}data \PY{o}{=} cuckoos\PY{p}{,} aes\PY{p}{(}x \PY{o}{=} breadth\PY{p}{,} y \PY{o}{=}\PY{k+kp}{length}\PY{p}{)}\PY{p}{)} \PY{o}{+}
+              geom\PYZus{}point\PY{p}{(}alpha \PY{o}{=} \PY{l+m}{0.8}\PY{p}{,} aes\PY{p}{(}color \PY{o}{=} species\PY{p}{)}\PY{p}{)} \PY{o}{+}
+              stat\PYZus{}smooth\PY{p}{(}method\PY{o}{=} \PY{l+s}{\PYZdq{}}\PY{l+s}{lm\PYZdq{}}\PY{p}{,} fill\PY{o}{=}\PY{l+s}{\PYZdq{}}\PY{l+s}{blue\PYZdq{}}\PY{p}{,}  size\PY{o}{=}\PY{l+m}{2}\PY{p}{,} alpha\PY{o}{=}\PY{l+m}{0.1}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_27_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}223}]:} \PY{c+c1}{\PYZsh{}B : different parallel lines for different host species}
+          
+          model4 \PY{o}{\PYZlt{}\PYZhy{}} lm\PY{p}{(}length \PY{o}{\PYZti{}} breadth \PY{o}{+} species\PY{p}{,} data \PY{o}{=} cuckoos\PY{p}{)}
+          augmented\PYZus{}data \PY{o}{=} augment\PY{p}{(}model4\PY{p}{)}
+          \PY{c+c1}{\PYZsh{}glimpse(augmented\PYZus{}data)}
+          
+          data\PYZus{}space \PY{o}{\PYZlt{}\PYZhy{}} ggplot\PY{p}{(}augmented\PYZus{}data\PY{p}{,} aes\PY{p}{(}x \PY{o}{=} breadth\PY{p}{,} y \PY{o}{=} \PY{k+kp}{length}\PY{p}{,} color\PY{o}{=}species\PY{p}{)}\PY{p}{)} \PY{o}{+} 
+                    geom\PYZus{}point\PY{p}{(}\PY{p}{)}
+          
+          data\PYZus{}space \PY{o}{+} 
+                geom\PYZus{}line\PY{p}{(}aes\PY{p}{(}y \PY{o}{=} \PY{l+m}{.}fitted\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_28_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}224}]:} \PY{c+c1}{\PYZsh{} C: separate line for the separate host species}
+          
+          \PY{c+c1}{\PYZsh{}get all species}
+          species\PYZus{}labels \PY{o}{=} \PY{k+kp}{unique}\PY{p}{(}cuckoos\PY{o}{\PYZdl{}}species\PY{p}{)}
+          
+          models \PY{o}{=} \PY{k+kt}{list}\PY{p}{(}\PY{p}{)}
+          
+          \PY{k+kr}{for} \PY{p}{(}specie \PY{k+kr}{in} species\PYZus{}labels\PY{p}{)}\PY{p}{\PYZob{}}
+              data  \PY{o}{\PYZlt{}\PYZhy{}} cuckoos \PY{o}{\PYZpc{}\PYZgt{}\PYZpc{}} filter\PY{p}{(}species\PY{o}{==}specie\PY{p}{)}
+              model \PY{o}{\PYZlt{}\PYZhy{}} lm \PY{p}{(}length \PY{o}{\PYZti{}} breadth\PY{p}{,} data \PY{o}{=} data\PY{p}{)}
+              models\PY{p}{[}specie\PY{p}{]} \PY{o}{=} model
+              \PY{p}{\PYZcb{}}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}237}]:} ggplot\PY{p}{(}data \PY{o}{=} cuckoos\PY{p}{,} aes\PY{p}{(}x \PY{o}{=} breadth\PY{p}{,} y \PY{o}{=}\PY{k+kp}{length}\PY{p}{)}\PY{p}{)} \PY{o}{+}
+              geom\PYZus{}point\PY{p}{(}alpha \PY{o}{=} \PY{l+m}{0.8}\PY{p}{,} aes\PY{p}{(}color \PY{o}{=} species\PY{p}{)}\PY{p}{)} \PY{o}{+}
+              geom\PYZus{}abline\PY{p}{(}slope \PY{o}{=} models\PY{o}{\PYZdl{}}meadow.pipit\PY{p}{[}\PY{l+m}{2}\PY{p}{]}\PY{p}{,} intercept \PY{o}{=} models\PY{o}{\PYZdl{}}meadow.pipit\PY{p}{[}\PY{l+m}{1}\PY{p}{]}\PY{p}{,} color\PY{o}{=}\PY{l+s}{\PYZdq{}}\PY{l+s}{darkgoldenrod\PYZdq{}}\PY{p}{)} \PY{o}{+}
+              geom\PYZus{}abline\PY{p}{(}slope \PY{o}{=} models\PY{o}{\PYZdl{}}hedge.sparrow\PY{p}{[}\PY{l+m}{2}\PY{p}{]}\PY{p}{,} intercept \PY{o}{=} models\PY{o}{\PYZdl{}}hedge.sparrow\PY{p}{[}\PY{l+m}{1}\PY{p}{]}\PY{p}{,} color\PY{o}{=}\PY{l+s}{\PYZdq{}}\PY{l+s}{coral1\PYZdq{}}\PY{p}{)} \PY{o}{+}
+              geom\PYZus{}abline\PY{p}{(}slope \PY{o}{=} models\PY{o}{\PYZdl{}}pied.wagtail\PY{p}{[}\PY{l+m}{2}\PY{p}{]}\PY{p}{,} intercept \PY{o}{=} models\PY{o}{\PYZdl{}}pied.wagtail\PY{p}{[}\PY{l+m}{1}\PY{p}{]}\PY{p}{,} color\PY{o}{=}\PY{l+s}{\PYZdq{}}\PY{l+s}{aquamarine3\PYZdq{}}\PY{p}{)} \PY{o}{+}
+              geom\PYZus{}abline\PY{p}{(}slope \PY{o}{=} models\PY{o}{\PYZdl{}}robin\PY{p}{[}\PY{l+m}{2}\PY{p}{]}\PY{p}{,} intercept \PY{o}{=} models\PY{o}{\PYZdl{}}robin\PY{p}{[}\PY{l+m}{1}\PY{p}{]}\PY{p}{,} color\PY{o}{=}\PY{l+s}{\PYZdq{}}\PY{l+s}{cyan2\PYZdq{}}\PY{p}{)} \PY{o}{+}
+              geom\PYZus{}abline\PY{p}{(}slope \PY{o}{=} models\PY{o}{\PYZdl{}}tree.pipit\PY{p}{[}\PY{l+m}{2}\PY{p}{]}\PY{p}{,} intercept \PY{o}{=} models\PY{o}{\PYZdl{}}tree.pipit\PY{p}{[}\PY{l+m}{1}\PY{p}{]}\PY{p}{,} color\PY{o}{=}\PY{l+s}{\PYZdq{}}\PY{l+s}{cornflowerblue\PYZdq{}}\PY{p}{)} \PY{o}{+}
+              geom\PYZus{}abline\PY{p}{(}slope \PY{o}{=} models\PY{o}{\PYZdl{}}wren\PY{p}{[}\PY{l+m}{2}\PY{p}{]}\PY{p}{,} intercept \PY{o}{=} models\PY{o}{\PYZdl{}}wren\PY{p}{[}\PY{l+m}{1}\PY{p}{]}\PY{p}{,} color\PY{o}{=}\PY{l+s}{\PYZdq{}}\PY{l+s}{hotpink3\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_30_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}
